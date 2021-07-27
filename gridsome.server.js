@@ -1,3 +1,4 @@
+const proxy = require('express-http-proxy'); 
 // Server API makes it possible to hook into various parts of Gridsome
 // on server-side and add custom data to the GraphQL data layer.
 // Learn more: https://gridsome.org/docs/server-api/
@@ -13,4 +14,8 @@ module.exports = function (api) {
   api.createPages(({ createPage }) => {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
   })
+
+  api.configureServer(app => {
+    app.use('/backend', process.env.GRIDSOME_API_URL === 'production' ? proxy('http://42.240.129.107:1337') : proxy('http://localhost:1337'))
+  });
 }
