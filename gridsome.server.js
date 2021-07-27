@@ -16,6 +16,6 @@ module.exports = function (api) {
   })
 
   api.configureServer(app => {
-    app.use('/backend', process.env.GRIDSOME_API_URL === 'production' ? proxy('http://42.240.129.107:1337') : proxy('http://localhost:1337'))
+    app.use('/backend', proxy('http://42.240.129.107:1337'))
   });
 }
